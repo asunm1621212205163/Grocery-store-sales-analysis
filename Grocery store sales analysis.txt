@@ -1,0 +1,41 @@
+#Grocery store sales analysis
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample Data (You can replace this with your actual CSV file)
+data = {
+    'Date': ['2023-03-01', '2023-03-02', '2023-03-02', '2023-03-03', '2023-03-03'],
+    'Item': ['Apples', 'Bananas', 'Bread', 'Milk', 'Eggs'],
+    'Category': ['Fruits', 'Fruits', 'Bakery', 'Dairy', 'Dairy'],
+    'Sales': [200, 150, 120, 180, 220],
+    'Region': ['North', 'South', 'North', 'East', 'East']
+}
+
+# Convert Data to DataFrame
+df = pd.DataFrame(data)
+
+# Convert 'Date' column to datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Total Sales by Category
+category_sales = df.groupby('Category')['Sales'].sum()
+print("Total Sales by Category:")
+print(category_sales)
+
+# Visualization: Sales by Category
+category_sales.plot(kind='bar', title='Total Sales by Category')
+plt.xlabel('Category')
+plt.ylabel('Total Sales')
+plt.show()
+
+# Total Sales by Region
+region_sales = df.groupby('Region')['Sales'].sum()
+print("\nTotal Sales by Region:")
+print(region_sales)
+
+# Visualization: Sales by Region
+region_sales.plot(kind='pie', title='Sales Distribution by Region', autopct='%1.1f%%')
+plt.ylabel('')  # Hides y-axis label
+plt.show()
+
